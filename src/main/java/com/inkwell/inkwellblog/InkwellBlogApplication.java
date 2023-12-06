@@ -11,5 +11,6 @@ public class InkwellBlogApplication {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SpringApplication.run(InkwellBlogApplication.class, args);
         new InitSqlite();
+        // test
     }
 }
