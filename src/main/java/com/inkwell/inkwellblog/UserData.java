@@ -1,22 +1,45 @@
 package com.inkwell.inkwellblog;
 
-public class UserData {
-    private String userId;
-    private String password;
+public class UserData extends ReturnData{
+    private String account;
+    private String UID;
+    private String nickname;
+    private int userType;
+    private String token;
 
-    public String getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUid() {
+        return UID;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public String getNickname() { return nickname; }
+
+    public int getUserType() { return userType; }
+
+    public String getToken() {
+        return token;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAccount(String userId) {
+        this.account = userId;
+    }
+
+    public void setUid(String password) {
+        this.UID = password;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
