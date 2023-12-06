@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.API;
+package com.inkwell.inkwellblog.API.User;
 
 import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.RequestParam.SignupParam;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("user")
 public class Signup {
     /**
      * Signup请求
