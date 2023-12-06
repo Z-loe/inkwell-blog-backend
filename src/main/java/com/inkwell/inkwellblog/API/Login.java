@@ -4,7 +4,7 @@ import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.RequestParam.LoginParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.ReturnData.UserDataBase;
+import com.inkwell.inkwellblog.ReturnData.UserData;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ public class Login {
         else
         {
 
-            UserDataBase userData = new UserDataBase();
+            UserData userData = new UserData();
 
             String sqlUID      = "select UID from User where '%s'".formatted(account);
             String  UID = sqliteHelper.executeQuery(sqlUID, resultSet ->

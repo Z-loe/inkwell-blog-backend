@@ -4,7 +4,7 @@ import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.RequestParam.SignupParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.ReturnData.UserDataBase;
+import com.inkwell.inkwellblog.ReturnData.UserData;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -25,10 +25,8 @@ public class Signup {
         SqliteHelper sqliteHelper= InitSqlite.getSqliteHelper();
         //检查用户是否存在
         String sqlQueryString = "select count(*) from User where account = '%s'".formatted(account);
-        int result = sqliteHelper.executeQuery(sqlQueryString, resultSet -> {
-            return resultSet.getInt("count(*)");
-        });
-        UserDataBase userData = new UserDataBase();
+        int result = sqliteHelper.executeQuery(sqlQueryString, resultSet -> resultSet.getInt("count(*)"));
+        UserData userData = new UserData();
 
         if(result!=0){
             userData.setCode(0);
@@ -40,9 +38,7 @@ public class Signup {
         userData.setCode(1);
         userData.setMessage("注册成功");
         String sqlQueryCountString = "select count(*) from User";
-        int resultCount = sqliteHelper.executeQuery(sqlQueryCountString, resultSet -> {
-            return resultSet.getInt("count(*)");
-        });
+        int resultCount = sqliteHelper.executeQuery(sqlQueryCountString, resultSet -> resultSet.getInt("count(*)"));
         userData.setUid(resultCount+1);
         userData.setAccount(account);
         userData.setUserType(0);
