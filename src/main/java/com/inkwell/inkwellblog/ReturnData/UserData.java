@@ -2,7 +2,7 @@ package com.inkwell.inkwellblog.ReturnData;
 
 public class UserData extends BaseReturnData {
     private String account;
-    private String UID;
+    private String uid;
     private String nickname;
     private int userType;
     private String token;
@@ -12,7 +12,7 @@ public class UserData extends BaseReturnData {
     }
 
     public String getUid() {
-        return UID;
+        return uid;
     }
 
     public String getNickname() { return nickname; }
@@ -28,7 +28,7 @@ public class UserData extends BaseReturnData {
     }
 
     public void setUid(String UID) {
-        this.UID = UID;
+        this.uid = UID;
     }
 
     public void setNickname(String nickname) {
