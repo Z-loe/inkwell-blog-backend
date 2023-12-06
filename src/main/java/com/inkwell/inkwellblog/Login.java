@@ -56,18 +56,15 @@ public class Login {
             {
                 return resultSet.getString("token");
             });
-
-            userData.setUid(UID);
+            userData.setCode(1);
+            userData.setMessage("登录成功");
+            userData.setUid(Integer.parseInt(UID));
             userData.setNickname(nickname);
             userData.setUserType(userType);
             userData.setToken(token);
             return userData;
 
-
-
-
         }
-
 
     }
 }
