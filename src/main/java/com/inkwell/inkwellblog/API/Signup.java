@@ -1,5 +1,10 @@
-package com.inkwell.inkwellblog;
+package com.inkwell.inkwellblog.API;
 
+import com.inkwell.inkwellblog.DataBase.InitSqlite;
+import com.inkwell.inkwellblog.RequestParam.SignupParam;
+import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
+import com.inkwell.inkwellblog.DataBase.SqliteHelper;
+import com.inkwell.inkwellblog.ReturnData.UserDataBase;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -9,20 +14,21 @@ import java.sql.SQLException;
 @RequestMapping("/")
 public class Signup {
     /**
-     * Signup请求示例
-     * @param account uid参数
-     * @param password password参数
+     * Signup请求
      * @return 返回状态码code和提示信息Message
      */
     @PostMapping("signup")
-    public ReturnData signup(@RequestParam String account, @RequestParam String password, @RequestParam String nickname) throws SQLException, ClassNotFoundException {
-        SqliteHelper sqliteHelper=InitSqlite.getSqliteHelper();
+    public BaseReturnData signup(@RequestBody SignupParam param) throws SQLException, ClassNotFoundException {
+        String  account = param.getAccount();
+        String  password = param.getPassword();
+        String nickname = param.getNickname();
+        SqliteHelper sqliteHelper= InitSqlite.getSqliteHelper();
         //检查用户是否存在
         String sqlQueryString = "select count(*) from User where account = '%s'".formatted(account);
         int result = sqliteHelper.executeQuery(sqlQueryString, resultSet -> {
             return resultSet.getInt("count(*)");
         });
-        UserData userData = new UserData();
+        UserDataBase userData = new UserDataBase();
 
         if(result!=0){
             userData.setCode(0);

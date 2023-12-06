@@ -1,6 +1,6 @@
-package com.inkwell.inkwellblog;
+package com.inkwell.inkwellblog.ReturnData;
 //
-public class UserData extends ReturnData{
+public class UserDataBase extends BaseReturnData {
     private String account;
     private int UID;
     private String nickname;

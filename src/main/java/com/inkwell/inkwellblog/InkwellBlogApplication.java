@@ -1,5 +1,6 @@
 package com.inkwell.inkwellblog;
 
+import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,5 +1,10 @@
-package com.inkwell.inkwellblog;
+package com.inkwell.inkwellblog.API;
 
+import com.inkwell.inkwellblog.DataBase.InitSqlite;
+import com.inkwell.inkwellblog.RequestParam.LoginParam;
+import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
+import com.inkwell.inkwellblog.DataBase.SqliteHelper;
+import com.inkwell.inkwellblog.ReturnData.UserDataBase;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -10,8 +15,10 @@ import java.sql.SQLException;
 public class Login {
 
     @PostMapping("login")
-    public ReturnData logIn(@RequestParam String account, @RequestParam String password) throws SQLException, ClassNotFoundException
+    public BaseReturnData logIn(@RequestBody LoginParam param) throws SQLException, ClassNotFoundException
     {
+        String account = param.getAccount();
+        String password = param.getPassword();
         SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
         String sql = "select count(*) from User where account = '%s'".formatted(account);
         int result = sqliteHelper.executeQuery(sql, resultSet ->
@@ -22,7 +29,7 @@ public class Login {
 
         if(result == 0 )
         {
-            ReturnData returnData = new ReturnData();
+            BaseReturnData returnData = new BaseReturnData();
             returnData.setCode(-1);
             returnData.setMessage("用户不存在");
             return returnData;
@@ -30,7 +37,7 @@ public class Login {
         else
         {
 
-            UserData userData = new UserData();
+            UserDataBase userData = new UserDataBase();
 
             String sqlUID      = "select UID from User where '%s'".formatted(account);
             String  UID = sqliteHelper.executeQuery(sqlUID, resultSet ->

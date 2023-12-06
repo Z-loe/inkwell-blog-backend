@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog;
+package com.inkwell.inkwellblog.DataBase;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;

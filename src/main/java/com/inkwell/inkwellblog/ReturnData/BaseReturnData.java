@@ -1,6 +1,6 @@
-package com.inkwell.inkwellblog;
+package com.inkwell.inkwellblog.ReturnData;
 
-public class ReturnData {
+public class BaseReturnData {
     private int code;
     private String message;
 
