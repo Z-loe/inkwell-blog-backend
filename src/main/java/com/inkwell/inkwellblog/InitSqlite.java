@@ -6,7 +6,7 @@ public class InitSqlite {
     private static SqliteHelper sqliteHelper = null;
     InitSqlite() throws SQLException, ClassNotFoundException {
         sqliteHelper = new SqliteHelper("inkwellDb.db");
-        String sqlCreateString = "create table if not exists User(userId text, password text, nickname text, userType int)";
+        String sqlCreateString = "create table if not exists User(UID integer, nickname text, account text, password text, userType int, token text)";
         sqliteHelper.executeUpdate(sqlCreateString);
     }
 
