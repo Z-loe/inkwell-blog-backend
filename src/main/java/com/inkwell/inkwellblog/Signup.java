@@ -10,31 +10,45 @@ import java.sql.SQLException;
 public class Signup {
     /**
      * Signup请求示例
-     * @param userId uid参数
+     * @param account uid参数
      * @param password password参数
      * @return 返回状态码code和提示信息Message
      */
     @PostMapping("signup")
-    public UserData signup(@RequestParam String userId, @RequestParam String password, @RequestParam String nickname) throws SQLException, ClassNotFoundException {
+    public ReturnData signup(@RequestParam String account, @RequestParam String password, @RequestParam String nickname) throws SQLException, ClassNotFoundException {
         SqliteHelper sqliteHelper=InitSqlite.getSqliteHelper();
         //检查用户是否存在
-        String sqlQueryString = "select * from User where userId = 123456";
-        String result = sqliteHelper.executeQuery(sqlQueryString, resultSet -> {
-            return resultSet.getString("password");
+        String sqlQueryString = "select count(*) from User where account = '%s'".formatted(account);
+        int result = sqliteHelper.executeQuery(sqlQueryString, resultSet -> {
+            return resultSet.getInt("count(*)");
         });
-        //添加数据
-        String sqlAddString = "insert into User(userId, password) values('123456', 'abcde')";
-        sqliteHelper.executeUpdate(sqlAddString);
-
-        // UserData为数据类，用于封装数据
         UserData userData = new UserData();
-        // 将传入的参数设置给数据类
-        userData.setUserId("123456");
-        userData.setPassword(result);
-        // 返回数据 like:
-        /*
-         *{userId: uid, password: psw}
-         * */
+
+        if(result!=0){
+            userData.setCode(0);
+            userData.setMessage("用户名已被占用");
+            return userData;
+        }
+
+        //设置用户数据
+        userData.setCode(1);
+        userData.setMessage("注册成功");
+        String sqlQueryCountString = "select count(*) from User";
+        int resultCount = sqliteHelper.executeQuery(sqlQueryCountString, resultSet -> {
+            return resultSet.getInt("count(*)");
+        });
+        userData.setUid(resultCount+1);
+        userData.setAccount(account);
+        userData.setUserType(0);
+        userData.setToken("hjghjk");
+        userData.setNickname(nickname);
+
+        //添入数据库
+        int UID=userData.getUid();
+        int userType= userData.getUserType();
+        String token= userData.getToken();
+        String sqlInsertString ="insert into User VALUES(%d,'%s','%s','%s',%d,'%s')".formatted(UID,nickname,account,password,userType,token);
+        sqliteHelper.executeUpdate(sqlInsertString);
         return userData;
     }
 }
