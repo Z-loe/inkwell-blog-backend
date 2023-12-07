@@ -5,10 +5,11 @@ import com.inkwell.inkwellblog.RequestParam.SignupParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.UserData;
+import com.inkwell.inkwellblog.Util.IDGenerator;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.UUID;
+
 
 @RestController
 @CrossOrigin
@@ -42,16 +43,7 @@ public class Signup {
         userData.setMessage("注册成功");
 //        String sqlQueryCountString = "select count(*) from User";
 //        int resultCount = sqliteHelper.executeQuery(sqlQueryCountString, resultSet -> resultSet.getInt("count(*)"));
-        // 根据随机UUID哈希值生成UID
-        int hashCode = UUID.randomUUID().toString().hashCode();
-        if (hashCode <0){
-            hashCode=-hashCode;
-        }
-        // 0 代表前面补充0
-        // 10 代表长度为10
-        // d 代表参数为正数型
-        String uid = String.format("%010d", hashCode).substring(0,10);
-
+        String uid = IDGenerator.generateID(10);
         userData.setUid(uid);
         userData.setAccount(account);
         userData.setUserType(0);
