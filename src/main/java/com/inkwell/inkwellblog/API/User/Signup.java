@@ -59,11 +59,10 @@ public class Signup {
         userData.setNickname(nickname);
 
         //添入数据库
-        String UID=userData.getUid();
         int userType= userData.getUserType();
         String token= userData.getToken();
 
-        String sqlInsertString ="insert into User VALUES('%s','%s','%s','%s',%d,'%s')".formatted(UID,nickname,account,password,userType,token);
+        String sqlInsertString ="insert into User VALUES('%s','%s','%s','%s',%d,'%s')".formatted(uid,nickname,account,password,userType,token);
         sqliteHelper.executeUpdate(sqlInsertString);
 
         return userData;

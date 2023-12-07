@@ -38,18 +38,18 @@ public class Login {
         {
             UserData userData = new UserData();
 
-            String getInfoSql = "select UID, nickname, userType from User where account = '%s'".formatted(account);
+            String getInfoSql = "select uid, nickname, userType from User where account = '%s'".formatted(account);
 
             sqliteHelper.executeQuery(getInfoSql, resultSet -> {
                 if (resultSet.next()) {
-                    String UID = resultSet.getString("UID");
+                    String uid = resultSet.getString("uid");
                     String nickname = resultSet.getString("nickname");
                     int userType = resultSet.getInt("userType");
 
                     // 将获取的数据设置到userData对象中
                     userData.setCode(200);
                     userData.setMessage("登录成功");
-                    userData.setUid(UID);
+                    userData.setUid(uid);
                     userData.setNickname(nickname);
                     userData.setUserType(userType);
                     userData.setAccount(account);
@@ -57,7 +57,7 @@ public class Login {
                     String token = UUID.randomUUID().toString();
                     userData.setToken(token);
                     // 保存token进数据库
-                    String saveTokenSql = "update User set token = '%s' where UID = '%s'".formatted(token, UID);
+                    String saveTokenSql = "update User set token = '%s' where uid = '%s'".formatted(token, uid);
                     try {
                         sqliteHelper.executeUpdate(saveTokenSql);
                     } catch (ClassNotFoundException e) {
