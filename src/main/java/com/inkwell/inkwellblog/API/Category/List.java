@@ -5,17 +5,15 @@ import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.ArticleData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.CategoryDate;
-import com.inkwell.inkwellblog.ReturnData.UserData;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin
 @RequestMapping("category")
 public class List {
-    @GetMapping("list")
+    @GetMapping ("list")
     public BaseReturnData list() throws SQLException, ClassNotFoundException {
         SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
         //检查类型是否为空
