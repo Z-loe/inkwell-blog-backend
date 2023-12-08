@@ -5,6 +5,7 @@ import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.ArticleData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.CategoryDate;
+import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -14,7 +15,21 @@ import java.sql.SQLException;
 @RequestMapping("category")
 public class CategoryList {
     @GetMapping ("list")
-    public BaseReturnData list() throws SQLException, ClassNotFoundException {
+    public BaseReturnData list(@RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+        //token鉴权
+        int checkResult = TokenAuthenticate.checkToken(token);
+        if (checkResult == -1){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("请先登录");
+            return returnData;
+        } else if(checkResult == 0){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("您没有权限执行此操作");
+            return returnData;
+        }
+
         SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
         //检查类型是否为空
         String sqlCount = "select count(*) from Category";
