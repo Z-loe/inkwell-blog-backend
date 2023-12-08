@@ -291,7 +291,7 @@ GET
 
 |    参数    |  类型  | 必填 |       说明        |
 | :--------: | :----: | :--: | :---------------: |
-|  keyword   | String |  否  |    标题关键字     |
+|  keyword   | String |  否  |    标题或内容关键字     |
 | categoryId | String |  否  |      分类ID       |
 |    page    |  int   |  否  |   页码 默认为1    |
 |  pageSize  |  int   |  否  | 分页大小 默认为10 |
