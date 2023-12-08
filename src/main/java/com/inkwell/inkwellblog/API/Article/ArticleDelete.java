@@ -1,23 +1,20 @@
 package com.inkwell.inkwellblog.API.Article;
-
 import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.AddArticleParam;
+import com.inkwell.inkwellblog.RequestParam.DeleteArticleParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
-import com.inkwell.inkwellblog.Util.IDGenerator;
-import org.springframework.web.bind.annotation.*;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-
 @RestController
 @CrossOrigin
 @RequestMapping("article")
 
-public class ArticleAdd
+public class ArticleDelete
 {
-    @PostMapping("add")
-    public BaseReturnData articleAdd(@RequestBody AddArticleParam  param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException
+    @PostMapping("delete")
+    public BaseReturnData categoryDelete(@RequestBody DeleteArticleParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException
     {
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
@@ -35,22 +32,17 @@ public class ArticleAdd
 
         SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
 
-        String id = IDGenerator.generateID(8);
-        String title = param.getTitle();
-        String categoryId = param.getCategoryId();
-        String content = param.getContent();
-        String createTime = String.valueOf(System.currentTimeMillis());
+        String deleteId = param.getId();
 
-        //插入数据到表
-        String sql = "INSERT INTO Article (id,title,content,categoryId,createTime) VALUES ('%s','%s','%s','%s','%s')".formatted(id, title,content,categoryId,createTime);
+        String sql = "DELETE FROM Article  WHERE id = '%s' ".formatted(deleteId);
         sqliteHelper.executeUpdate(sql);
 
         //返回状态码
         BaseReturnData returnData = new BaseReturnData();
         returnData.setCode(200);
-        returnData.setMessage("添加成功");
+        returnData.setMessage("删除成功");
         return returnData;
-//
+
     }
 
 }
