@@ -289,21 +289,54 @@ GET
 
 #### 请求参数说明
 
-| 参数 | 类型 | 必填 | 说明 |
-| :--: | :--: | :--: | :--: |
-|      |      |      |      |
+|    参数    |  类型  | 必填 |       说明        |
+| :--------: | :----: | :--: | :---------------: |
+|  keyword   | String |  否  |    标题关键字     |
+| categoryId | String |  否  |      分类ID       |
+|    page    |  int   |  否  |   页码 默认为1    |
+|  pageSize  |  int   |  否  | 分页大小 默认为10 |
 
 #### 返回参数说明
 
-| 参数 | 类型 | 说明 |
-| :--: | :--: | :--: |
-|      |      |      |
+|  参数   |  类型  |           说明            |
+| :-----: | :----: | :-----------------------: |
+|  code   |  int   | 请求结果200为成功-1为失败 |
+| message | String |       结果描述信息        |
+|  data   | Object |         分页数据          |
 
 #### json返回示例
 
 ```json
 {
-
+	code:200,
+    message:查询成功,
+    data:{
+        keyword:关键字,
+        category:分类ID,
+        page:页码,
+        pageSize:分页大小,
+        rows:[
+            {
+                id:文章id1,
+                title:文章标题1,
+                categoryId:文章所属分类ID,
+                createTime:文章创建时间1
+            },
+            {
+                id:文章id2,
+                title:文章标题2,
+                categoryId:文章所属分类ID,
+                createTime:文章创建时间2
+            },
+            {
+                id:文章id3,
+                title:文章标题3,
+                categoryId:文章所属分类ID,
+                createTime:文章创建时间3
+            }
+        ],
+        count:文章数量
+    }
 }
 ```
 
