@@ -12,7 +12,7 @@ import java.sql.SQLException;
 @RestController
 @CrossOrigin
 @RequestMapping("category")
-public class List {
+public class CategoryList {
     @GetMapping ("list")
     public BaseReturnData list() throws SQLException, ClassNotFoundException {
         SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();

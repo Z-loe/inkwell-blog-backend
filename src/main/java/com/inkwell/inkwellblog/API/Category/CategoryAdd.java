@@ -12,7 +12,7 @@ import java.sql.SQLException;
 @RestController
 @CrossOrigin
 @RequestMapping("category")
-public class Add
+public class CategoryAdd
 {
     @PostMapping("add")
     public BaseReturnData add(@RequestBody AddCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {

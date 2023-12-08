@@ -2,7 +2,7 @@ package com.inkwell.inkwellblog.API.Category;
 
 import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.UpdateCategoryParam;
+import com.inkwell.inkwellblog.RequestParam.DeleteCategoryParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,9 @@ import java.util.Objects;
 @RestController
 @CrossOrigin
 @RequestMapping("category")
-public class Update {
-    @PostMapping("update")
-    public BaseReturnData categoryUpdate(@RequestBody UpdateCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
-
+public class CategoryDelete {
+    @PostMapping("delete")
+    public BaseReturnData delete(@RequestBody DeleteCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
         if (checkResult == -1){
@@ -36,18 +35,18 @@ public class Update {
         String getInfoSql = "select id from Category";
         sqliteHelper.executeQuery(getInfoSql, resultSet -> {
             baseReturnData.setCode(-1);
-            baseReturnData.setMessage("更新失败");
+            baseReturnData.setMessage("删除失败");
             while (resultSet.next()) {
                 String id = resultSet.getString("id");
-                //更新
+                //查找
                 if(Objects.equals(id, param.getId())){
-                    String updateSql = "update Category set name ='%s' where id = '%s'".formatted(param.getName(),id);
+                    String Sql = "delete from Category where id='%s'".formatted(id);
                     try {
-                        sqliteHelper.executeUpdate(updateSql);
+                        sqliteHelper.executeUpdate(Sql);
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-                    baseReturnData.setMessage("更新成功");
+                    baseReturnData.setMessage("删除成功");
                     baseReturnData.setCode(200);
                     break;
                 }
