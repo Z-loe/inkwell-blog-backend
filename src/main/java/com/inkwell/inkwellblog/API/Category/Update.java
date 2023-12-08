@@ -15,7 +15,7 @@ import java.util.Objects;
 @RequestMapping("category")
 public class Update {
     @PostMapping("update")
-    public BaseReturnData update(@RequestBody UpdateCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData categoryUpdate(@RequestBody UpdateCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
