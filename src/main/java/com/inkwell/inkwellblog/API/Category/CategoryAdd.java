@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class CategoryAdd
 {
     @PostMapping("add")
-    public BaseReturnData add(@RequestBody AddCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData categoryAdd(@RequestBody AddCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
