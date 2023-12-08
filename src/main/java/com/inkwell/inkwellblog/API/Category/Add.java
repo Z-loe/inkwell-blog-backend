@@ -6,7 +6,7 @@ import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.Util.IDGenerator;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
-import com.inkwell.inkwellblog.RequestParam.AddParam;
+import com.inkwell.inkwellblog.RequestParam.AddCategoryParam;
 import java.sql.SQLException;
 
 @RestController
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class Add
 {
     @PostMapping("add")
-    public BaseReturnData add(@RequestBody AddParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData add(@RequestBody AddCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);

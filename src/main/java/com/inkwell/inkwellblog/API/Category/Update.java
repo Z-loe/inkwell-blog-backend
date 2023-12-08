@@ -2,7 +2,7 @@ package com.inkwell.inkwellblog.API.Category;
 
 import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.UpdateParam;
+import com.inkwell.inkwellblog.RequestParam.UpdateCategoryParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @RequestMapping("category")
 public class Update {
     @PostMapping("update")
-    public BaseReturnData update(@RequestBody UpdateParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData update(@RequestBody UpdateCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);

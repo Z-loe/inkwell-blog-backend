@@ -2,7 +2,7 @@ package com.inkwell.inkwellblog.API.Category;
 
 import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.DeleteParam;
+import com.inkwell.inkwellblog.RequestParam.DeleteCategoryParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @RequestMapping("category")
 public class Delete {
     @PostMapping("delete")
-    public BaseReturnData delete(@RequestBody DeleteParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData delete(@RequestBody DeleteCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
         // token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
         if (checkResult == -1){

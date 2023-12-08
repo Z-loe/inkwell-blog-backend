@@ -1,7 +1,7 @@
 package com.inkwell.inkwellblog.RequestParam;
 
 
-public class AddParam
+public class AddCategoryParam
 
 {
     private String name;

@@ -1,6 +1,6 @@
 package com.inkwell.inkwellblog.RequestParam;
 
-public class UpdateParam {
+public class UpdateCategoryParam {
     private String id;
     private String name;
 
