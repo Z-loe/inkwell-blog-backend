@@ -1,9 +1,9 @@
 package com.inkwell.inkwellblog.API.Category;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.RequestParam.DeleteCategoryParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class CategoryDelete {
             return returnData;
         }
 
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         BaseReturnData baseReturnData = new BaseReturnData();
         String getInfoSql = "select id from Category";
         sqliteHelper.executeQuery(getInfoSql, resultSet -> {
@@ -53,6 +53,7 @@ public class CategoryDelete {
             }
             return null;
         });
+        sqliteHelper.destroyed();
         return baseReturnData;
     }
 }

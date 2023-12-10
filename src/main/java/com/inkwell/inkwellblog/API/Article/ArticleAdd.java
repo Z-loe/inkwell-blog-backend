@@ -1,9 +1,9 @@
 package com.inkwell.inkwellblog.API.Article;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.RequestParam.AddArticleParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.IDGenerator;
 import org.springframework.web.bind.annotation.*;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
@@ -33,7 +33,7 @@ public class ArticleAdd
             return returnData;
         }
 
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
 
         String id = IDGenerator.generateID(8);
         String title = param.getTitle();
@@ -49,6 +49,7 @@ public class ArticleAdd
         BaseReturnData returnData = new BaseReturnData();
         returnData.setCode(200);
         returnData.setMessage("添加成功");
+        sqliteHelper.destroyed();
         return returnData;
 //
     }

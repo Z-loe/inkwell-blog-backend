@@ -1,6 +1,5 @@
 package com.inkwell.inkwellblog.Util;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ public class TokenAuthenticate {
         if (token.equals("")){
             return -1;
         }
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String sql = "select * from User where token = '%s'".formatted(token);
         return sqliteHelper.executeQuery(sql, resultSet ->{
             // 如果没找到也是返回0

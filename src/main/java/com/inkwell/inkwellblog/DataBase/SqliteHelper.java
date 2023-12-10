@@ -30,7 +30,7 @@ public class SqliteHelper {
     public SqliteHelper(String dbFilePath) throws ClassNotFoundException, SQLException {
         this.dbFilePath = dbFilePath;
         connection = getConnection(dbFilePath);
-        System.out.println("SQLite connection established\ndatabase path:" + dbFilePath);
+        //System.out.println("SQLite connection established\ndatabase path:" + dbFilePath);
     }
 
     /**

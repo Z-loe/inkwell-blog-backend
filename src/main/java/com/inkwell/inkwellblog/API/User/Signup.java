@@ -5,6 +5,7 @@ import com.inkwell.inkwellblog.RequestParam.SignupParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.UserData;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.IDGenerator;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class Signup {
         String password = param.getPassword();
         String nickname = param.getNickname();
 
-        SqliteHelper sqliteHelper= InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
 
         //检查用户是否存在
         String sqlQueryString = "select count(*) from User where account = '%s'".formatted(account);

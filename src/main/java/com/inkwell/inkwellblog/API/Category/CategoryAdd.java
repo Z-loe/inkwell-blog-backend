@@ -1,8 +1,8 @@
 package com.inkwell.inkwellblog.API.Category;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.IDGenerator;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class CategoryAdd
             return returnData;
         }
 
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String name = param.getName();
 
         //查找是否有同名文章类
@@ -48,13 +48,6 @@ public class CategoryAdd
         }
         else {
             //创建文章类
-            //查找最大ID
-//            String sqlcountid = "select count(*) FROM Category";
-//            int countid = sqliteHelper.executeQuery(sqlcountid, resultSet ->
-//            {
-//                return resultSet.getInt("count(*)");
-//            });
-//            countid++;
             String id = IDGenerator.generateID(6);
             //插入文章名到表
             String sqlCreateName = "INSERT INTO Category (id,name) VALUES ('%s','%s')".formatted(id, name);
@@ -63,6 +56,7 @@ public class CategoryAdd
             BaseReturnData returnData = new BaseReturnData();
             returnData.setCode(200);
             returnData.setMessage("添加成功");
+            sqliteHelper.destroyed();
             return returnData;
         }
 

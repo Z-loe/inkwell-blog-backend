@@ -1,10 +1,10 @@
 package com.inkwell.inkwellblog.API.User;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.RequestParam.LoginParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.UserData;
+import com.inkwell.inkwellblog.Util.Constants;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ public class Login {
     {
         String account = param.getAccount();
         String password = param.getPassword();
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String sql = "select count(*) from User where account = '%s' and password = '%s'".formatted(account, password);
         int result = sqliteHelper.executeQuery(sql, resultSet ->
         {
@@ -67,41 +67,8 @@ public class Login {
                 }
                 return null;
             });
+            sqliteHelper.destroyed();
             return userData;
-
-//            UserData userData = new UserData();
-//
-//            String sqlUID      = "select UID from User where '%s'".formatted(account);
-//            String  UID = sqliteHelper.executeQuery(sqlUID, resultSet ->
-//            {
-//                return resultSet.getString("UID");
-//            });
-//
-//
-//            String sqlnickname = "select nickname from User where '%s'".formatted(account);
-//            String  nickname = sqliteHelper.executeQuery(sqlnickname, resultSet ->
-//            {
-//                return resultSet.getString("nickname");
-//            });
-//
-//            String sqluserType = "select userType from User where '%s'".formatted(account);
-//            int  userType = sqliteHelper.executeQuery(sqluserType, resultSet ->
-//            {
-//                return resultSet.getInt("usertype");
-//            });
-//
-//            String sqltoken    = "select token from User where '%s'".formatted(account);
-//            String  token = sqliteHelper.executeQuery(sqltoken, resultSet ->
-//            {
-//                return resultSet.getString("token");
-//            });
-//            userData.setCode(1);
-//            userData.setMessage("登录成功");
-//            userData.setUid(Integer.parseInt(UID));
-//            userData.setNickname(nickname);
-//            userData.setUserType(userType);
-//            userData.setToken(token);
-//            return userData;
 
         }
 

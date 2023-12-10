@@ -1,8 +1,9 @@
 package com.inkwell.inkwellblog.API.Article;
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
+
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.RequestParam.DeleteArticleParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class ArticleDelete
             return returnData;
         }
 
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
 
         String deleteId = param.getId();
 
@@ -41,6 +42,8 @@ public class ArticleDelete
         BaseReturnData returnData = new BaseReturnData();
         returnData.setCode(200);
         returnData.setMessage("删除成功");
+
+        sqliteHelper.destroyed();
         return returnData;
 
     }

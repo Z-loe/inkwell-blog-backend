@@ -1,11 +1,11 @@
 package com.inkwell.inkwellblog.API.Article;
 
-import com.inkwell.inkwellblog.DataBase.InitSqlite;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.RequestParam.DetailArticleParam;
 import com.inkwell.inkwellblog.ReturnData.ArticleDetailData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.DetailData;
+import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ public class ArticleDetail {
             return returnData;
         }
 
-        SqliteHelper sqliteHelper = InitSqlite.getSqliteHelper();
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         ArticleDetailData articleDetailData=new ArticleDetailData();
         DetailData detailData= new DetailData();
         String getInfoSql = "select * from Article where id = '%s'".formatted(param.getId());
@@ -57,6 +57,7 @@ public class ArticleDetail {
             }
             return null;
         });
+        sqliteHelper.destroyed();
         return articleDetailData;
     }
 }
