@@ -12,7 +12,7 @@ public class AddArticleParam
 
 
     private String categoryId;
-    public void setCategoryId(String name) {this.categoryId = categoryId;}
+    public void setCategoryId(String categoryId) {this.categoryId = categoryId;}
     public String getCategoryId() {return categoryId;}
 
 
