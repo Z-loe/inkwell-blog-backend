@@ -1,6 +1,7 @@
 package com.inkwell.inkwellblog.API.Article;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
+import com.inkwell.inkwellblog.RequestParam.DetailArticleParam;
 import com.inkwell.inkwellblog.ReturnData.ArticleDetailData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.DetailData;

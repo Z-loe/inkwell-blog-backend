@@ -17,29 +17,28 @@ public class ArticleSearch {
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String categoryId,
             @RequestParam(defaultValue = "1", required = false) int page,
-            @RequestParam(defaultValue = "10", required = false) int pageSize,
-            @RequestHeader("token") String token
+            @RequestParam(defaultValue = "10", required = false) int pageSize
     ) throws SQLException, ClassNotFoundException {
-        // token鉴权
-        int checkResult = TokenAuthenticate.checkToken(token);
-        if (checkResult == -1){
-            Map<String, Object> returnData = new HashMap<>();
-            returnData.put("code", 403);
-            returnData.put("message", "请先登录");
-            return returnData;
-        } else if(checkResult == 0){
-            Map<String, Object> returnData = new HashMap<>();
-            returnData.put("code", 403);
-            returnData.put("message", "您没有权限执行此操作");
-            return returnData;
-        }
+//        // token鉴权
+//        int checkResult = TokenAuthenticate.checkToken(token);
+//        if (checkResult == -1){
+//            Map<String, Object> returnData = new HashMap<>();
+//            returnData.put("code", 403);
+//            returnData.put("message", "请先登录");
+//            return returnData;
+//        } else if(checkResult == 0){
+//            Map<String, Object> returnData = new HashMap<>();
+//            returnData.put("code", 403);
+//            returnData.put("message", "您没有权限执行此操作");
+//            return returnData;
+//        }
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         try {
             // 构建 SQL 查询语句
             String sql = "SELECT id, title, substr(content, 0, 50) as content, categoryId, createTime FROM Article WHERE 1=1";
             if (keyword != null) {
-                sql += " AND title LIKE '%" + keyword + "%'";
+                sql += " AND (title LIKE '%" + keyword + "%' OR content LIKE '%" + keyword + "%')";
             }
             if (categoryId != null) {
                 sql += " AND categoryId = '" + categoryId + "'";
@@ -60,11 +59,13 @@ public class ArticleSearch {
                 }
                 return result;
             });
+            // 优先输出最新文章
+            Collections.reverse(articleList);
 
             // 查询总数
             String countSql = "SELECT COUNT(*) AS count FROM Article WHERE 1=1";
             if (keyword != null) {
-                countSql += " AND title LIKE '%" + keyword + "%'";
+                countSql += " AND (title LIKE '%" + keyword + "%' OR content LIKE '%" + keyword + "%')";
             }
             if (categoryId != null) {
                 countSql += " AND categoryId = '" + categoryId + "'";
@@ -80,7 +81,7 @@ public class ArticleSearch {
                 put("category", categoryId);
                 put("page", page);
                 put("pageSize", pageSize);
-                put("rows", articleList);
+                put("rows",articleList);
                 put("count", count);
             }});
             return response;
