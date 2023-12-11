@@ -1,7 +1,6 @@
 package com.inkwell.inkwellblog.API.Article;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.DetailArticleParam;
 import com.inkwell.inkwellblog.ReturnData.ArticleDetailData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.DetailData;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 @RequestMapping("article")
 public class ArticleDetail {
     @GetMapping("detail")
-    public BaseReturnData articleDetail(@RequestBody DetailArticleParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
+    public BaseReturnData articleDetail(@RequestParam("id") String id, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 
         //token鉴权
         int checkResult = TokenAuthenticate.checkToken(token);
@@ -35,18 +34,18 @@ public class ArticleDetail {
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         ArticleDetailData articleDetailData=new ArticleDetailData();
         DetailData detailData= new DetailData();
-        String getInfoSql = "select * from Article where id = '%s'".formatted(param.getId());
+        String getInfoSql = "select * from Article where id = '%s'".formatted(id);
         sqliteHelper.executeQuery(getInfoSql, resultSet -> {
             articleDetailData.setCode(-1);
             articleDetailData.setMessage("获取失败");
             if (resultSet.next()) {
 
-                String id = resultSet.getString("id");
+                String rid = resultSet.getString("id");
                 String title = resultSet.getString("title");
                 String categoryId = resultSet.getString("categoryId");
                 String content = resultSet.getString("content");
                 String createTime = resultSet.getString("createTime");
-                detailData.setId(id);
+                detailData.setId(rid);
                 detailData.setTitle(title);
                 detailData.setCategoryId(categoryId);
                 detailData.setContent(content);
