@@ -40,9 +40,11 @@ public class CategoryDelete {
                 String id = resultSet.getString("id");
                 //查找
                 if(Objects.equals(id, param.getId())){
-                    String Sql = "delete from Category where id='%s'".formatted(id);
+                    String SqlDelete = "delete from Category where id='%s'".formatted(id);
+                    String SqlUpdate = "update Article set categoryId = null where categoryId = '%s'".formatted(id);
                     try {
-                        sqliteHelper.executeUpdate(Sql);
+                        sqliteHelper.executeUpdate(SqlDelete);
+                        sqliteHelper.executeUpdate(SqlUpdate);
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
