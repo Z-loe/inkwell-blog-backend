@@ -2,13 +2,12 @@ package com.inkwell.inkwellblog.API.Comment;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
+import com.inkwell.inkwellblog.RequestParam.AddArticleParam;
 import com.inkwell.inkwellblog.RequestParam.PostCommentParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.Constants;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.inkwell.inkwellblog.Util.TokenAuthenticate;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 @RestController
@@ -16,8 +15,21 @@ import java.sql.SQLException;
 @RequestMapping("comment")
 public class CommentPost {
     @PostMapping("post")
-    public BaseReturnData post(PostCommentParam param) throws SQLException, ClassNotFoundException, JsonProcessingException {
+    public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException, JsonProcessingException {
 
+        // token鉴权
+        int checkResult = TokenAuthenticate.checkToken(token);
+        if (checkResult == -1){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("请先登录");
+            return returnData;
+        } else if(checkResult == 0){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("您没有权限执行此操作");
+            return returnData;
+        }
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String id = param.getId();
