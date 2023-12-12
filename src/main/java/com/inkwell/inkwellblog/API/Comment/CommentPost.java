@@ -15,21 +15,21 @@ import java.sql.SQLException;
 @RequestMapping("comment")
 public class CommentPost {
     @PostMapping("post")
-    public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException{
+    public BaseReturnData post(PostCommentParam param) throws SQLException, ClassNotFoundException{
 
-        // token鉴权
-        int checkResult = TokenAuthenticate.checkToken(token);
-        if (checkResult == -1){
-            BaseReturnData returnData = new BaseReturnData();
-            returnData.setCode(403);
-            returnData.setMessage("请先登录");
-            return returnData;
-        }
+//        // token鉴权
+//        int checkResult = TokenAuthenticate.checkToken(token);
+//        if (checkResult == -1){
+//            BaseReturnData returnData = new BaseReturnData();
+//            returnData.setCode(403);
+//            returnData.setMessage("请先登录");
+//            return returnData;
+//        }
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String id = param.getId();
         String uid = param.getUid();
         String commentParam = param.getComment();
-        String commentString="{ id: "+id+",uid: "+uid+",content: "+commentParam+" }";
+        String commentString="{ \"id\": "+id+",\"uid\": "+uid+",\"content\": "+commentParam+" }";
 
         String sqlQuery = "SELECT comment FROM Article WHERE id= "+id;
         sqliteHelper.executeQuery(sqlQuery, resultSet -> {
