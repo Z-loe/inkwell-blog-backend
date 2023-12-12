@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("comment")
 public class CommentList {
     @GetMapping("list")
-    public Map<String, Object> commentList(String id) throws SQLException, ClassNotFoundException{
+    public Map<String, Object> commentList(@RequestParam String id) throws SQLException, ClassNotFoundException{
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String sqlQuery = "SELECT comment FROM Article WHERE id= "+id;
