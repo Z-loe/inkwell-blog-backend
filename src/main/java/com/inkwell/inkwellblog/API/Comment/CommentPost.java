@@ -15,10 +15,16 @@ import java.sql.SQLException;
 @RequestMapping("comment")
 public class CommentPost {
     @PostMapping("post")
-    public BaseReturnData commentPost(PostCommentParam param) throws SQLException, ClassNotFoundException, JsonProcessingException {
+    public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException{
 
-
-
+        // token鉴权
+        int checkResult = TokenAuthenticate.checkToken(token);
+        if (checkResult == -1){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("请先登录");
+            return returnData;
+        }
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String id = param.getId();
         String uid = param.getUid();
@@ -29,7 +35,7 @@ public class CommentPost {
         sqliteHelper.executeQuery(sqlQuery, resultSet -> {
             String comment = resultSet.getString("comment");
             String commentList;
-            if (comment == null) {
+            if (comment == null || comment.equals("") || comment.equals("[]")) {
                 commentList ="["+commentString+"]";
             }
             else {
