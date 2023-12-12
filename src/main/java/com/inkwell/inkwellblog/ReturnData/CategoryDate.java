@@ -2,6 +2,7 @@ package com.inkwell.inkwellblog.ReturnData;
 
 public class CategoryDate {
     private String id;
+    private String name;
 
     public String getName() {
         return name;
@@ -11,7 +12,6 @@ public class CategoryDate {
         this.name = name;
     }
 
-    private String name;
 
     public String getId() {
         return id;

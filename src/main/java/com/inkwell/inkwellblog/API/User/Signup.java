@@ -42,8 +42,6 @@ public class Signup {
         //设置用户数据
         userData.setCode(200);
         userData.setMessage("注册成功");
-//        String sqlQueryCountString = "select count(*) from User";
-//        int resultCount = sqliteHelper.executeQuery(sqlQueryCountString, resultSet -> resultSet.getInt("count(*)"));
         String uid = IDGenerator.generateID(10);
         userData.setUid(uid);
         userData.setAccount(account);
