@@ -15,21 +15,9 @@ import java.sql.SQLException;
 @RequestMapping("comment")
 public class CommentPost {
     @PostMapping("post")
-    public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException, JsonProcessingException {
+    public BaseReturnData commentPost(PostCommentParam param) throws SQLException, ClassNotFoundException, JsonProcessingException {
 
-        // token鉴权
-        int checkResult = TokenAuthenticate.checkToken(token);
-        if (checkResult == -1){
-            BaseReturnData returnData = new BaseReturnData();
-            returnData.setCode(403);
-            returnData.setMessage("请先登录");
-            return returnData;
-        } else if(checkResult == 0){
-            BaseReturnData returnData = new BaseReturnData();
-            returnData.setCode(403);
-            returnData.setMessage("您没有权限执行此操作");
-            return returnData;
-        }
+
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String id = param.getId();
@@ -42,10 +30,10 @@ public class CommentPost {
             String comment = resultSet.getString("comment");
             String commentList;
             if (comment == null) {
-                commentList ="{"+commentString+"}";
+                commentList ="["+commentString+"]";
             }
             else {
-                commentList= comment.substring(0, comment.length() - 1) + ","+commentString+"}";
+                commentList= comment.substring(0, comment.length() - 1) + ","+commentString+"]";
             }
 
             //插入数据到表
