@@ -1,12 +1,10 @@
 package com.inkwell.inkwellblog.API.Article;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.DetailArticleParam;
 import com.inkwell.inkwellblog.ReturnData.ArticleDetailData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.DetailData;
 import com.inkwell.inkwellblog.Util.Constants;
-import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -16,21 +14,7 @@ import java.sql.SQLException;
 @RequestMapping("article")
 public class ArticleDetail {
     @GetMapping("detail")
-    public BaseReturnData articleDetail(@RequestParam("id") String id, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
-
-        //token鉴权
-        int checkResult = TokenAuthenticate.checkToken(token);
-        if (checkResult == -1){
-            BaseReturnData returnData = new BaseReturnData();
-            returnData.setCode(403);
-            returnData.setMessage("请先登录");
-            return returnData;
-        } else if(checkResult == 0){
-            BaseReturnData returnData = new BaseReturnData();
-            returnData.setCode(403);
-            returnData.setMessage("您没有权限执行此操作");
-            return returnData;
-        }
+    public BaseReturnData articleDetail(@RequestParam("id") String id) throws SQLException, ClassNotFoundException {
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         ArticleDetailData articleDetailData=new ArticleDetailData();

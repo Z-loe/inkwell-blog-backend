@@ -2,7 +2,6 @@ package com.inkwell.inkwellblog.API.Article;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.Util.Constants;
-import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -17,22 +16,9 @@ public class ArticleSearch {
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String categoryId,
             @RequestParam(defaultValue = "1", required = false) int page,
-            @RequestParam(defaultValue = "10", required = false) int pageSize,
-            @RequestHeader("token") String token
+            @RequestParam(defaultValue = "10", required = false) int pageSize
     ) throws SQLException, ClassNotFoundException {
-        // token鉴权
-        int checkResult = TokenAuthenticate.checkToken(token);
-        if (checkResult == -1){
-            Map<String, Object> returnData = new HashMap<>();
-            returnData.put("code", 403);
-            returnData.put("message", "请先登录");
-            return returnData;
-        } else if(checkResult == 0){
-            Map<String, Object> returnData = new HashMap<>();
-            returnData.put("code", 403);
-            returnData.put("message", "您没有权限执行此操作");
-            return returnData;
-        }
+
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         try {
