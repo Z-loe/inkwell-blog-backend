@@ -3,6 +3,7 @@ package com.inkwell.inkwellblog.API.Comment;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.RequestParam.AddArticleParam;
+import com.inkwell.inkwellblog.RequestParam.DeleteArticleParam;
 import com.inkwell.inkwellblog.RequestParam.PostCommentParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.Constants;
@@ -15,16 +16,16 @@ import java.sql.SQLException;
 @RequestMapping("comment")
 public class CommentPost {
     @PostMapping("post")
-    public BaseReturnData post(PostCommentParam param) throws SQLException, ClassNotFoundException{
+    public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException{
 
-//        // token鉴权
-//        int checkResult = TokenAuthenticate.checkToken(token);
-//        if (checkResult == -1){
-//            BaseReturnData returnData = new BaseReturnData();
-//            returnData.setCode(403);
-//            returnData.setMessage("请先登录");
-//            return returnData;
-//        }
+        // token鉴权
+        int checkResult = TokenAuthenticate.checkToken(token);
+        if (checkResult == -1){
+            BaseReturnData returnData = new BaseReturnData();
+            returnData.setCode(403);
+            returnData.setMessage("请先登录");
+            return returnData;
+        }
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String id = param.getId();
         String uid = param.getUid();
