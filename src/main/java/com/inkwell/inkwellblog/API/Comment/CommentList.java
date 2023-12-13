@@ -25,18 +25,16 @@ public class CommentList {
 
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         String sqlQuery = "SELECT comment FROM Article WHERE id= "+id;
-        List<Map<String, Object>> commentList =sqliteHelper.executeQuery(sqlQuery, resultSet -> {
-            String comment = resultSet.getString("comment");
-            ObjectMapper mapper = new ObjectMapper();
-            List<Map<String, Object>> List = null;
-            try {
-                List = mapper.readValue(comment, new TypeReference<>() {
-                });
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-            return List;
-        });
+        String comment =sqliteHelper.executeQuery(sqlQuery, resultSet -> resultSet.getString("comment"));
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<Map<String, Object>> commentList;
+        try {
+            commentList = mapper.readValue(comment, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         // 构建返回结果
         Map<String, Object> response = new HashMap<>();
