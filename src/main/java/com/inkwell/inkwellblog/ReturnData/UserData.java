@@ -6,6 +6,7 @@ public class UserData extends BaseReturnData {
     private String nickname;
     private int userType;
     private String token;
+    private String avatar;
 
     public String getAccount() {
         return account;
@@ -39,5 +40,13 @@ public class UserData extends BaseReturnData {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

@@ -38,13 +38,14 @@ public class Login {
         {
             UserData userData = new UserData();
 
-            String getInfoSql = "select uid, nickname, userType from User where account = '%s'".formatted(account);
+            String getInfoSql = "select uid, nickname, userType, avatar from User where account = '%s'".formatted(account);
 
             sqliteHelper.executeQuery(getInfoSql, resultSet -> {
                 if (resultSet.next()) {
                     String uid = resultSet.getString("uid");
                     String nickname = resultSet.getString("nickname");
                     int userType = resultSet.getInt("userType");
+                    String avatar = resultSet.getString("nickname");
 
                     // 将获取的数据设置到userData对象中
                     userData.setCode(200);
@@ -53,6 +54,7 @@ public class Login {
                     userData.setNickname(nickname);
                     userData.setUserType(userType);
                     userData.setAccount(account);
+                    userData.setAvatar(avatar);
                     // 利用UUID生成随机token
                     String token = UUID.randomUUID().toString();
                     userData.setToken(token);

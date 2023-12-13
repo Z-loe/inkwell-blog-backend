@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.inkwell.inkwellblog.Util.IDGenerator.generateID;
+
 @RestController
 @CrossOrigin
 @RequestMapping("comment")
@@ -44,6 +46,8 @@ public class CommentPost {
         commentData.put("uid", uid);
         commentData.put("content", commentParam);
         commentData.put("time", System.currentTimeMillis());
+        String cid=generateID(10);
+        commentData.put("cid",cid);
 
         List<HashMap<String, Object>> resultList;
 
