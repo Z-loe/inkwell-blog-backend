@@ -52,6 +52,52 @@ POST
 
 ------
 
+### ✨获取用户信息
+
+#### 接口地址
+
+`/user/info`
+
+#### 返回格式
+
+json
+
+#### 请求类型
+
+GET
+
+#### 请求参数说明
+
+| 参数 |  类型  | 必填 |  说明  |
+| :--: | :----: | :--: | :----: |
+| uid  | String |  是  | 用户id |
+
+#### 返回参数说明
+
+|  参数   |  类型  |                说明                 |
+| :-----: | :----: | :---------------------------------: |
+|  code   |  int   | 请求结果200为获取成功，-1为登录失败 |
+| message | String |              描述信息               |
+|  data   | Object |              用户信息               |
+
+#### json返回示例
+
+```json
+{
+	code:200,
+	message:查询成功,
+    data:{
+        nickname:LiHua,
+		uid:2045267191,
+		account:123456,
+		userType:0,
+    	avatar:"http://localhost:8080/statci/avatar/001.png"
+    }
+}
+```
+
+------
+
 ### ✨用户登录
 
 #### 接口地址
@@ -84,6 +130,7 @@ POST
 | account  | String |              用户账号               |
 | userType |  int   |              用户类型               |
 |  token   | String |              登录凭证               |
+|  avatar  | String |              头像地址               |
 
 #### json返回示例
 
@@ -95,7 +142,8 @@ POST
 	uid:2045267191,
 	account:123456,
 	userType:0,
-    token:41737a45-bb97-42b8-8078-88decef581c8
+    token:41737a45-bb97-42b8-8078-88decef581c8,
+    avatar:"http://localhost:8080/statci/avatar/001.png"
 }
 ```
 
@@ -523,12 +571,64 @@ GET
 
 
 
-## 文件上传接口
+## 文件上传
+
+### ✨富文本图片上传
 
 #### 接口地址
 
 ```
 /upload/image
+```
+
+#### 返回类型
+
+json
+
+#### 请求类型
+
+POST
+
+#### 请求参数说明
+
+| 参数 | 类型 | 必填 |    说明    |
+| :--: | :--: | :--: | :--------: |
+| file | 图片 |  是  | 上传的图片 |
+
+#### 返回参数说明
+
+|  参数   |  类型  |            说明             |
+| :-----: | :----: | :-------------------------: |
+|  code   |  int   | 请求结果200为成功，-1为失败 |
+| message | String |          结果说明           |
+|  data   |  List  |   返回图片静态地址等数据    |
+
+#### json返回示例
+
+```
+{
+	code:200,
+	message:上传成功,
+	data:[
+		{
+			url:"http://localhost:8080/static/1.png"
+			alt:"",
+			herf:""
+		}
+	]
+}
+```
+
+
+
+----
+
+### ✨用户头像上传
+
+#### 接口地址
+
+```
+/upload/avatar
 ```
 
 #### 返回类型
