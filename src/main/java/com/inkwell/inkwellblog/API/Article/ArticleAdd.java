@@ -42,7 +42,7 @@ public class ArticleAdd
         String createTime = String.valueOf(System.currentTimeMillis());
 
         //插入数据到表
-        String sql = "INSERT INTO Article (id,title,content,categoryId,createTime) VALUES ('%s','%s','%s','%s','%s')".formatted(id, title,content,categoryId,createTime);
+        String sql = "INSERT INTO Article (id,title,content,categoryId,createTime, comment) VALUES ('%s','%s','%s','%s','%s','%s')".formatted(id, title,content,categoryId,createTime,"[]");
         sqliteHelper.executeUpdate(sql);
 
         //返回状态码
