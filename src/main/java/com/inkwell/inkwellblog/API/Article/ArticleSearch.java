@@ -19,7 +19,6 @@ public class ArticleSearch {
             @RequestParam(defaultValue = "10", required = false) int pageSize
     ) throws SQLException, ClassNotFoundException {
 
-
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
         try {
             // 构建 SQL 查询语句
@@ -30,8 +29,8 @@ public class ArticleSearch {
             if (categoryId != null && !categoryId.equals("")) {
                 sql += " AND categoryId = '" + categoryId + "'";
             }
-            sql += " LIMIT " + pageSize + " OFFSET " + (page - 1) * pageSize;
-
+            sql += " ORDER BY CAST(createTime AS timestamp) DESC";
+            sql += " LIMIT " + pageSize + " OFFSET " + ((page - 1) * pageSize);
             // 执行查询并处理结果
             List<Map<String, Object>> articleList = sqliteHelper.executeQuery(sql, rs -> {
                 List<Map<String, Object>> result = new ArrayList<>();
@@ -47,14 +46,14 @@ public class ArticleSearch {
                 return result;
             });
             // 优先输出最新文章
-            Collections.reverse(articleList);
+//            Collections.reverse(articleList);
 
             // 查询总数
             String countSql = "SELECT COUNT(*) AS count FROM Article WHERE 1=1";
-            if (keyword != null) {
+            if (keyword != null && !keyword.equals("")) {
                 countSql += " AND (title LIKE '%" + keyword + "%' OR content LIKE '%" + keyword + "%')";
             }
-            if (categoryId != null) {
+            if (categoryId != null && !categoryId.equals("")) {
                 countSql += " AND categoryId = '" + categoryId + "'";
             }
             int count = sqliteHelper.executeQuery(countSql, rs -> rs.getInt("count"));
