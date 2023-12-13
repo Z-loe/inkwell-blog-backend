@@ -1,7 +1,9 @@
 package com.inkwell.inkwellblog.API.Upload;
 
+import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.ImageData;
 import com.inkwell.inkwellblog.ReturnData.WangEditorResponseData;
+import com.inkwell.inkwellblog.Util.Constants;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +31,14 @@ public class UploadUserAvatar {
     }
 
     @PostMapping("/avatar")
-    public Object uploadUserAvatar(@RequestParam("file") MultipartFile[] files, Map<String, Object> map, HttpServletRequest request) throws IOException {
+    public Object uploadUserAvatar(@RequestParam("file") MultipartFile[] files, @RequestParam("uid") String uid, Map<String, Object> map, HttpServletRequest request) throws IOException, SQLException, ClassNotFoundException {
         if (files == null || files.length == 0){
             WangEditorResponseData responseData = new  WangEditorResponseData();
             responseData.setErrno(1);
-            responseData.setMessage("上传失败");
+            responseData.setMessage("未选择文件");
             return responseData;
         }
-        String value;
+        String value = null;
         List<ImageData> data = new ArrayList<>();
         for (MultipartFile file : files) {
             String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "_" + file.getOriginalFilename();
@@ -54,6 +57,9 @@ public class UploadUserAvatar {
             imageData.setUrl(value);
             data.add(imageData);
         }
+        SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
+        String sql = "update User set avatar='%s' where uid='%s'".formatted(value, uid);
+        sqliteHelper.executeUpdate(sql, sql);
         WangEditorResponseData responseData = new  WangEditorResponseData();
         responseData.setErrno(0);
         responseData.setMessage("上传成功");
