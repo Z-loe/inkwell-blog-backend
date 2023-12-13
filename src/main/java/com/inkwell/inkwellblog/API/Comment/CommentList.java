@@ -11,10 +11,7 @@ import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -36,11 +33,12 @@ public class CommentList {
             throw new RuntimeException(e);
         }
 
+        Collections.reverse(commentList); // 排序
         // 构建返回结果
         Map<String, Object> response = new HashMap<>();
         response.put("code", 200);
         response.put("message", "查询成功");
-        response.put("data",commentList);
+        response.put("data", commentList);
         sqliteHelper.destroyed();
         return response;
     }
