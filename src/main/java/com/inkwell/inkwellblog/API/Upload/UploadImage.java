@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.API;
+package com.inkwell.inkwellblog.API.Upload;
 
 import com.inkwell.inkwellblog.ReturnData.ImageData;
 import com.inkwell.inkwellblog.ReturnData.WangEditorResponseData;
@@ -19,16 +19,16 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("upload")
-public class Upload {
+public class UploadImage {
 
     private final ResourceLoader resourceLoader;
 
-    public Upload(ResourceLoader resourceLoader) {
+    public UploadImage(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
     @PostMapping("/image")
-    public Object uploadFile(@RequestParam("file") MultipartFile[] files, Map<String, Object> map, HttpServletRequest request) throws IOException {
+    public Object uploadImage(@RequestParam("file") MultipartFile[] files, Map<String, Object> map, HttpServletRequest request) throws IOException {
         if (files == null || files.length == 0){
             WangEditorResponseData responseData = new  WangEditorResponseData();
             responseData.setErrno(1);
@@ -46,7 +46,7 @@ public class Upload {
                 e.printStackTrace();
             }
 
-            value = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/static/" + fileName;
+            value = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/static/images/" + fileName;
             map.put("imgName", fileName);
             map.put("imgUrl", value);
             System.out.println(map);
@@ -67,7 +67,7 @@ public class Upload {
 
         // 获取resources目录的路径
         String baseResourcePath = staticDir.getParentFile().getCanonicalPath();
-        File filePath = new File(baseResourcePath + File.separator + "static", fileName);
+        File filePath = new File(baseResourcePath + File.separator + "static/images", fileName);
         filePath.getParentFile().mkdirs();
         filePath.createNewFile();
 
