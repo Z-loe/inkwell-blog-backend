@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.RequestParam;
+package com.inkwell.inkwellblog.RequestParam.User;
 
 public class LoginParam {
     private String account;

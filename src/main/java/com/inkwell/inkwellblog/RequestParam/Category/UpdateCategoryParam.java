@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.RequestParam;
+package com.inkwell.inkwellblog.RequestParam.Category;
 
 public class UpdateCategoryParam {
     private String id;

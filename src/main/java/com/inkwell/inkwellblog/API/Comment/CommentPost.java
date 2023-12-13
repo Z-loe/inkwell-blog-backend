@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.PostCommentParam;
+import com.inkwell.inkwellblog.RequestParam.Comment.PostCommentParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;

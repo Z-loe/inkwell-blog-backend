@@ -1,7 +1,7 @@
 package com.inkwell.inkwellblog.API.Article;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.RequestParam.UpdateArticleParam;
+import com.inkwell.inkwellblog.RequestParam.Article.UpdateArticleParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;

@@ -1,6 +1,6 @@
 package com.inkwell.inkwellblog.API.User;
 
-import com.inkwell.inkwellblog.RequestParam.LoginParam;
+import com.inkwell.inkwellblog.RequestParam.User.LoginParam;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
 import com.inkwell.inkwellblog.ReturnData.UserData;

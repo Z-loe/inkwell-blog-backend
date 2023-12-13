@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.RequestParam;
+package com.inkwell.inkwellblog.RequestParam.Comment;
 
 public class DeleteCommentParam
 {

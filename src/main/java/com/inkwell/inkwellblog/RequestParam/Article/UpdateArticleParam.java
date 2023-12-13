@@ -1,4 +1,4 @@
-package com.inkwell.inkwellblog.RequestParam;
+package com.inkwell.inkwellblog.RequestParam.Article;
 
 public class UpdateArticleParam {
     private String id;

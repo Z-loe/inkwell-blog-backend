@@ -1,7 +1,7 @@
 package com.inkwell.inkwellblog.API.Category;
 
 import com.inkwell.inkwellblog.DataBase.SqliteHelper;
-import com.inkwell.inkwellblog.ReturnData.ArticleData;
+import com.inkwell.inkwellblog.ReturnData.Article.ArticleData;
 import com.inkwell.inkwellblog.ReturnData.BaseReturnData;
 import com.inkwell.inkwellblog.ReturnData.CategoryDate;
 import com.inkwell.inkwellblog.Util.Constants;

@@ -6,7 +6,7 @@ import com.inkwell.inkwellblog.Util.Constants;
 import com.inkwell.inkwellblog.Util.IDGenerator;
 import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 import org.springframework.web.bind.annotation.*;
-import com.inkwell.inkwellblog.RequestParam.AddCategoryParam;
+import com.inkwell.inkwellblog.RequestParam.Category.AddCategoryParam;
 import java.sql.SQLException;
 
 @RestController

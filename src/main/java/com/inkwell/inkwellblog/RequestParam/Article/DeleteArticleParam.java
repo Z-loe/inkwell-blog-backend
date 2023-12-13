@@ -1,6 +1,8 @@
-package com.inkwell.inkwellblog.RequestParam;
+package com.inkwell.inkwellblog.RequestParam.Article;
 
-public class DetailArticleParam {
+
+public class DeleteArticleParam
+{
     private String id;
 
     public String getId() {
