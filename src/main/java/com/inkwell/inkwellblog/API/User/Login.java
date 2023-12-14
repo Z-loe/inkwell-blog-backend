@@ -45,7 +45,7 @@ public class Login {
                     String uid = resultSet.getString("uid");
                     String nickname = resultSet.getString("nickname");
                     int userType = resultSet.getInt("userType");
-                    String avatar = resultSet.getString("nickname");
+                    String avatar = resultSet.getString("avatar");
 
                     // 将获取的数据设置到userData对象中
                     userData.setCode(200);
