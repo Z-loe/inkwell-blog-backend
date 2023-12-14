@@ -16,7 +16,7 @@ public class Info {
     public Map<String, Object> info(@RequestParam("uid") String uid) throws SQLException, ClassNotFoundException {
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);
 
-        String sqlQueryString = "select * from User where uid = "+uid;
+        String sqlQueryString = "select * from User where uid = '%s'".formatted(uid);
         Map<String, Object> response=sqliteHelper.executeQuery(sqlQueryString, resultSet -> {
             Map<String, Object> result = new HashMap<>();
             if (resultSet.next()) {
