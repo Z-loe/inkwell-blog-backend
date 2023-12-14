@@ -52,7 +52,7 @@ public class CommentDelete
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(resultList);
+        // System.out.println(resultList);
 
         //根据cid查找、删除评论
        for(int i = 0; i < resultList.size(); i++)
@@ -64,7 +64,7 @@ public class CommentDelete
                break;
            }
        }
-        System.out.println(resultList);
+        // System.out.println(resultList);
 
         //转换为字符串
         String resultString = objectMapper.writeValueAsString(resultList);
