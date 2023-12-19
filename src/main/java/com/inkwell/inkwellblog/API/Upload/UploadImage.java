@@ -26,7 +26,11 @@ public class UploadImage {
     public UploadImage(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
-
+    /**
+     * @description: 上传图片
+     * @param: [files, map, request]
+     * @return: java.lang.Object
+     **/
     @PostMapping("/image")
     public Object uploadImage(@RequestParam("file") MultipartFile[] files, Map<String, Object> map, HttpServletRequest request) throws IOException {
         if (files == null || files.length == 0){

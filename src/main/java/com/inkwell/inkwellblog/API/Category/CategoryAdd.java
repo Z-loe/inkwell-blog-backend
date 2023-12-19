@@ -14,6 +14,11 @@ import java.sql.SQLException;
 @RequestMapping("category")
 public class CategoryAdd
 {
+    /**
+     * @description: 添加标签
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("add")
     public BaseReturnData categoryAdd(@RequestBody AddCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 

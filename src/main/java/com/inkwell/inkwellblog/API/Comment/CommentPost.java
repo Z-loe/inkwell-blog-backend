@@ -20,6 +20,11 @@ import static com.inkwell.inkwellblog.Util.IDGenerator.generateID;
 @CrossOrigin
 @RequestMapping("comment")
 public class CommentPost {
+    /**
+     * @description: 发表评论
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("post")
     public BaseReturnData post(@RequestBody PostCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException, JsonProcessingException {
 

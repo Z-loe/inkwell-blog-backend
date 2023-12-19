@@ -14,6 +14,11 @@ import java.util.*;
 @CrossOrigin
 @RequestMapping("comment")
 public class CommentList {
+    /**
+     * @description: 查看评论
+     * @param: [id]
+     * @return: java.util.Map<java.lang.String,java.lang.Object>
+     **/
     @GetMapping("list")
     public Map<String, Object> commentList(@RequestParam String id) throws SQLException, ClassNotFoundException{
 

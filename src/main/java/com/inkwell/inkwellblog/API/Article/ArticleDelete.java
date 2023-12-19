@@ -14,6 +14,11 @@ import java.sql.SQLException;
 
 public class ArticleDelete
 {
+    /**
+     * @description: 删除文章
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("delete")
     public BaseReturnData categoryDelete(@RequestBody DeleteArticleParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException
     {

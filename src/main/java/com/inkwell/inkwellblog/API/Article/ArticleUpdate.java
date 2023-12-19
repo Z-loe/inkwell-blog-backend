@@ -14,6 +14,11 @@ import java.util.Objects;
 @CrossOrigin
 @RequestMapping("article")
 public class ArticleUpdate {
+    /**
+     * @description: 更新文章
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("update")
     public BaseReturnData articleUpdate(@RequestBody UpdateArticleParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
 

@@ -14,7 +14,11 @@ import java.util.UUID;
 @CrossOrigin
 @RequestMapping("user")
 public class Login {
-
+    /**
+     * @description:登录请求
+     * @param: [param]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("login")
     public BaseReturnData logIn(@RequestBody LoginParam param) throws SQLException, ClassNotFoundException
     {

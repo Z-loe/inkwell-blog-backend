@@ -20,6 +20,11 @@ import java.util.Objects;
 @RequestMapping("comment")
 public class CommentDelete
 {
+    /**
+     * @description: 删除评论
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("delete")
     public BaseReturnData commentDelete(@RequestBody DeleteCommentParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException, JsonProcessingException {
         // token鉴权

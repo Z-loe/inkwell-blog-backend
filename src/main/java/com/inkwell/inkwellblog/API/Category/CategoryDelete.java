@@ -14,6 +14,11 @@ import java.util.Objects;
 @CrossOrigin
 @RequestMapping("category")
 public class CategoryDelete {
+    /**
+     * @description: 删除标签
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("delete")
     public BaseReturnData delete(@RequestBody DeleteCategoryParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
         // token鉴权

@@ -29,7 +29,11 @@ public class UploadUserAvatar {
     public UploadUserAvatar(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
-
+    /**
+     * @description: 头像上传请求
+     * @param: [files, uid, map, request]
+     * @return: java.lang.Object
+     **/
     @PostMapping("/avatar")
     public Object uploadUserAvatar(@RequestParam("file") MultipartFile[] files, @RequestParam("uid") String uid, Map<String, Object> map, HttpServletRequest request) throws IOException, SQLException, ClassNotFoundException {
         if (files == null || files.length == 0){

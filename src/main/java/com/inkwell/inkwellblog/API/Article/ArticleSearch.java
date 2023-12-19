@@ -11,6 +11,11 @@ import java.util.*;
 @CrossOrigin
 @RequestMapping("article")
 public class ArticleSearch {
+    /**
+     * @description:文章搜索
+     * @param: [keyword, categoryId, page, pageSize]
+     * @return: java.util.Map<java.lang.String,java.lang.Object>
+     **/
     @GetMapping("search")
     public Map<String, Object> searchArticles(
             @RequestParam(required = false) String keyword,

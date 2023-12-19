@@ -10,12 +10,17 @@ import com.inkwell.inkwellblog.Util.TokenAuthenticate;
 
 import java.sql.SQLException;
 
+
 @RestController
 @CrossOrigin
 @RequestMapping("article")
-
 public class ArticleAdd
 {
+    /**
+     * @description: 添加文章
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("add")
     public BaseReturnData articleAdd(@RequestBody AddArticleParam  param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException
     {

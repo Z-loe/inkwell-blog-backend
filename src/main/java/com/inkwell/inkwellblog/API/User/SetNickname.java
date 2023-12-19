@@ -12,6 +12,11 @@ import java.sql.SQLException;
 @CrossOrigin
 @RequestMapping("user")
 public class SetNickname {
+    /**
+     * @description: 设置昵称
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("set_nickname")
     public BaseReturnData nickname(@RequestBody NicknameParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
         //token鉴权

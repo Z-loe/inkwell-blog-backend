@@ -15,6 +15,11 @@ import java.util.UUID;
 @CrossOrigin
 @RequestMapping("user")
 public class SetPassword {
+    /**
+     * @description: 设置密码
+     * @param: [param, token]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("set_password")
     public BaseReturnData password(@RequestBody PasswordParam param, @RequestHeader("token") String token) throws SQLException, ClassNotFoundException {
         //token鉴权

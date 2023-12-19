@@ -13,6 +13,11 @@ import java.sql.SQLException;
 @CrossOrigin
 @RequestMapping("article")
 public class ArticleDetail {
+    /**
+     * @description: 查看文章详情
+     * @param: [id]
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @GetMapping("detail")
     public BaseReturnData articleDetail(@RequestParam("id") String id) throws SQLException, ClassNotFoundException {
 

@@ -16,9 +16,9 @@ import java.sql.SQLException;
 @RequestMapping("user")
 public class Signup {
     /**
-     * Signup请求
-     * @return 返回状态码code和提示信息Message
-     */
+     * @description: 注册请求
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @PostMapping("signup")
     public BaseReturnData signup(@RequestBody SignupParam param) throws SQLException, ClassNotFoundException {
         String account = param.getAccount();

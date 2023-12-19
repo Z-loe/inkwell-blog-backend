@@ -12,6 +12,11 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("user")
 public class Info {
+    /**
+     * @description: 查看用户信息
+     * @param: [uid]
+     * @return: java.util.Map<java.lang.String,java.lang.Object>
+     **/
     @GetMapping("info")
     public Map<String, Object> info(@RequestParam("uid") String uid) throws SQLException, ClassNotFoundException {
         SqliteHelper sqliteHelper = new SqliteHelper(Constants.DATABASE_PATH);

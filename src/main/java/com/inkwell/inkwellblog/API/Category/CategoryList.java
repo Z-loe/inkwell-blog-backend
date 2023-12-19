@@ -13,6 +13,10 @@ import java.sql.SQLException;
 @CrossOrigin
 @RequestMapping("category")
 public class CategoryList {
+    /**
+     * @description: 查看标签
+     * @return: com.inkwell.inkwellblog.ReturnData.BaseReturnData
+     **/
     @GetMapping ("list")
     public BaseReturnData list() throws SQLException, ClassNotFoundException {
 
